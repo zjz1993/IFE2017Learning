@@ -1,0 +1,161 @@
+<!html>
+  <head>
+    <style>
+      .mask{
+        width: 100%;
+        height:100%;
+        background-color: rgba(0,0,0,0.2);
+        position: fixed;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        z-index: 0;
+      }
+      .dialog{
+        border: 1px solid #aaaaaa;
+        box-sizing: border-box;
+        transform: translate(-50%,-50%);
+        position: fixed;
+        top:50%;
+        left:50%;
+        z-index: 1;
+        min-width: 400px;
+      }
+      .dialog-title{
+        height:50px;
+        background-color: grey;
+        line-height: 50px;
+        padding-left: 10px;
+      }
+      .dialog-body{
+        background-color: white;
+        padding: 10px;
+        min-height: 100px;
+      }
+      .dialog-footer{
+        padding: 10px;
+        background-color: white;
+      }
+      .dialog-footer:after {
+        content: "";
+        display: block;
+        height: 0;
+        clear: both;
+      }
+      .dialog-footer-content{
+        float:right;
+      }
+      @keyframes myDisplay {
+        from{
+          display: none;
+        }
+        to{
+          display: block;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="test">test</button>
+  </body>
+  <script>
+    document.getElementById('test').onclick=function(event){
+      event.stopPropagation();
+      const dialog=new CreateDialog({
+        title:'这是标题',
+        body:'这是主体',
+        okEvent:function(){
+          console.log('点了确定');
+        },
+        cancelEvent:function(){
+          console.log('点了取消');
+        }
+      });
+      dialog.createMain();
+    };
+
+    document.onclick=function(event){
+      const dialog=new CreateDialog({title:'这是标题',body:'这是主体'});
+      dialog.destroy(event);
+    };
+
+    class CreateDialog{
+      constructor(option){
+        this.title=option.title;
+        this.body=option.body;
+        this.okEvent=option.okEvent;
+        this.cancelEvent=option.cancelEvent;
+      }
+      setClass(dom,classname){
+        dom.setAttribute('class',classname);
+      }
+      setInnerHTML(dom,content){
+        dom.innerHTML=content;
+      }
+      createSubDiv(innerContent,classname){
+        var dom=this.createDiv();
+        this.setInnerHTML(dom,innerContent);
+        this.setClass(dom,classname);
+        return dom;
+      }
+      createDiv(){
+        return document.createElement('div');
+      }
+
+      appendSubDiv(dom,...children){
+        for(let i=0;i<children.length;i++){
+          dom.append(children[i]);
+        }
+      }
+      createFooter(){
+        const divFooter=this.createDiv();
+        this.setClass(divFooter,'dialog-footer');
+        function test(){
+          console.log('haha')
+        }
+        const innerFooter=this.createSubDiv(`<button onclick=${this.okEvent}>确定</button><button onclick=${this.cancelEvent}>取消</button>`,'dialog-footer-content');
+        divFooter.appendChild(innerFooter);
+        return divFooter;
+      }
+
+      createMask(){
+        const maskDiv=document.createElement('div');
+        maskDiv.setAttribute('class','mask');
+        const root=document.querySelector('body');
+        const dialog=document.querySelector('.dialog');
+        dialog.style.display='block';
+        root.appendChild(maskDiv);
+      }
+
+      createMain(){
+        const div=this.createDiv();
+        div.setAttribute('class','dialog');
+        this.appendSubDiv(div,this.createSubDiv(this.title,'dialog-title'),this.createSubDiv(this.body,'dialog-body'),this.createFooter());
+        this.appendSubDiv(document.querySelector('body'),div);
+        this.createMask();
+      }
+      disappear(){
+        const root=document.querySelector('body');
+        const dialog=document.querySelector('.dialog');
+        root.removeChild(dialog);
+        const mask=document.querySelector('.mask');
+        root.removeChild(mask);
+      }
+      destroy(event){
+        const root=document.querySelector('body');
+        const dialog=document.querySelector('.dialog');
+        console.log(event.target);
+        if(dialog){
+          if(event.target!==dialog){
+            // 点击的区域在框外的时候才关闭
+            if(!dialog.contains(event.target)){
+              this.disappear();
+            }
+          }
+        }
+      }
+    }
+
+  </script>
+</html>
