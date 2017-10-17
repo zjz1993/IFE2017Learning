@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="00b9650f-ba83-4ca9-9f19-e28eb12790c5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/basicLesson/binbinAcademy/task4.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html" afterPath="$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -18,17 +16,17 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="task6.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="task6.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="task4.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="task4.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/basicLesson/binbinAcademy/task4.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="150">
@@ -53,8 +51,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html" />
         <option value="$PROJECT_DIR$/basicLesson/binbinAcademy/task4.html" />
+        <option value="$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html" />
       </list>
     </option>
   </component>
@@ -203,12 +201,12 @@
       <option name="presentableId" value="Default" />
       <updated>1508145583796</updated>
       <workItem from="1508145585093" duration="620000" />
-      <workItem from="1508208172523" duration="4065000" />
+      <workItem from="1508208172523" duration="4164000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4685000" />
+    <option name="totallyTimeSpent" value="4784000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="242" y="25" width="1532" height="985" extended-state="0" />
@@ -251,18 +249,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="121" column="0" lean-forward="true" selection-start-line="121" selection-start-column="0" selection-end-line="121" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/basicLesson/binbinAcademy/task4.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="10" column="23" lean-forward="false" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/basicLesson/yaoyaoAcademy/task6.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
