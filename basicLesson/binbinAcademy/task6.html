@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE</title>
+</head>
+<style>
+    #dataArea{
+        padding-top: 20px;
+        display: flex;
+        cursor: pointer;
+    }
+    #dataArea span{
+        display: block;
+        width: 50px;
+        height:50px;
+        background-color: #3ec0c8;
+        line-height: 50px;
+        text-align: center;
+        color: white;
+        margin-right: 10px;
+    }
+    #dataArea .select{
+        background-color: darkred;
+    }
+</style>
+<body>
+<input id="inputNum">
+<span id="btnArea">
+    <button data-type="left-in">左侧入</button>
+    <button data-type="right-in">右侧入</button>
+    <button data-type="left-out">左侧出</button>
+    <button data-type="right-out">右侧出</button>
+</span>
+<span >
+    <input id="search">
+    <button data-type="query" id="searchArea">查询</button>
+</span>
+<div id="dataArea" />
+</body>
+<script>
+    /*
+    * 有一个input输入框，以及4个操作按钮
+    点击"左侧入"，将input中输入的数字从左侧插入队列中；
+    点击"右侧入"，将input中输入的数字从右侧插入队列中；
+    点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素中数值；
+    点击"右侧出"，读取并删除队列又侧第一个元素，并弹窗显示元素中数值；
+    点击队列中任何一个元素，则该元素会被从队列中删除
+    * */
+    class DataQuery{
+        constructor(){
+            this.array=[];
+        }
+        operation(number,type){
+            if (isNaN(number)){
+                alert('请输入数字！');
+            }else{
+                switch(type){
+                    case 'left-in': this.array.unshift(number);break;
+                    case 'right-in':this.array.push(number);break;
+                    case 'left-out':this.array.shift();break;
+                    case 'right-out':this.array.pop();break;
+                    case 'query':this.query(number);break;
+                }
+                return this.array;
+            }
+
+        }
+        delete(number){
+            const index=this.array.indexOf(number);
+            this.array.splice(index,1);
+            return this.array;
+        }
+        render(array,indexItem=null){
+            const isSelect = indexItem>=0 ? 'select' : null;
+            let spanArray = array.map((item,index)=>{
+                if(index===indexItem){
+                    return `<span class="${isSelect}">${item}</span>`;
+                }else{
+                    return `<span >${item}</span>`;
+                }
+            });
+            let result='';
+            for(let i=0;i<spanArray.length;i++){
+                result+=spanArray[i];
+            }
+            document.querySelector('#dataArea').innerHTML=result;
+        }
+        query(number){
+            const index = this.array.indexOf(number);
+            if(index!==-1){
+                this.render(this.array,index);
+            }
+        }
+    }
+
+    const dataArray = new DataQuery();
+    const btnArea = document.querySelector('#btnArea');
+    const dataArea = document.querySelector('#dataArea');
+    const searchArea = document.querySelector('#searchArea');
+
+    searchArea.addEventListener('click',(event)=>{
+        const type = event.target.dataset.type;
+        const number = parseInt(document.querySelector('#search').value);
+        dataArray.operation(number,type);
+    });
+
+    dataArea.addEventListener('click',(event)=>{
+        const number=parseInt(event.target.innerHTML);
+        const array=dataArray.delete(number);
+        if(array){
+            dataArray.render(array);
+        }
+    });
+
+    btnArea.addEventListener('click',(event)=>{
+        const type = event.target.dataset.type;
+        const number = parseInt(document.querySelector('#inputNum').value);
+        const array=dataArray.operation(number,type);
+        if(array){
+            dataArray.render(array);
+        }
+    });
+
+</script>
+</html>
