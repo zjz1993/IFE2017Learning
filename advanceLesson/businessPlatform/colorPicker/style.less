@@ -1,0 +1,73 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+.cpWrapper {
+  width: 700px;
+  height: 500px;
+  border: 2px solid lightgray;
+  border-radius: 5px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 10px;
+  .cpMainArea{
+    width: 100%;
+    height:400px;
+    display: flex;
+    .colorBlock{
+      width: 400px;
+    }
+    .colorItem{
+      margin-left: 20px;
+    }
+    .colorCalc{
+      margin-left: 20px;
+      .calc{
+        position: relative;
+        font-size: 25px;
+        .btnArea{
+          position: absolute;
+          right: 0;
+          cursor: pointer;
+          border: 2px solid lightgray;
+          width: 20px;
+          top:0;
+          .plus{
+
+          }
+          .subtract{
+
+          }
+        }
+        input{
+          width: 170px;
+          height:50px;
+          border: 2px solid lightgray;
+          margin-bottom: 120px;
+        }
+      }
+    }
+  }
+  .cpOutputArea{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+    .colorInput{
+      margin-right: 50px;
+      input{
+        outline: none;
+        border: none;
+        border-bottom: 1px solid black;
+      }
+    }
+    #colorShow{
+      border: 1px solid black;
+      background-color: rebeccapurple;
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
