@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>task4</title>
+</head>
+<style>
+  .panel{
+    width: 400px;
+    height:400px;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 100px 100px 100px 100px;
+    grid-template-rows: 100px 100px 100px 100px;
+  }
+  .panel .grid{
+    width: 100px;
+    height:100px;
+    border: 1px solid black;
+    box-sizing: border-box;
+  }
+  #block{
+    background-color: red;
+    border-top:20px solid blue;
+    position: relative;
+  }
+  .left{
+    transform: rotate(90deg);
+  }
+  .right{
+    transform: rotate(-90deg);
+  }
+  .back{
+    transform: rotate(180deg);
+  }
+  .operationArea{
+    margin-top: 20px;
+  }
+  .operationArea button{
+    outline: none;
+    cursor: pointer;
+  }
+</style>
+<body>
+  <div class="panel">
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid" id="block"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+    <div class="grid"></div>
+  </div>
+  <div class="operationArea">
+    <button data-type="forward">前进</button>
+    <button data-type="left">左转</button>
+    <button data-type="right">右转</button>
+    <button data-type="back">后转</button>
+  </div>
+</body>
+<script type="text/javascript">
+  class Block{
+    constructor(){
+      this.deg = 0;
+      this.directionInfo={
+        // 1 前 2右 3 后 4 左
+        direction: 1,
+        row: 1,
+        column: 2,
+        offsetX: 0,
+        offsetY: 0
+      };
+      this.dom = document.getElementById('block');
+    }
+    setDeg(deg) {
+      this.dom.style.transform = `rotate(${deg}deg)`;
+    }
+    goForward(){
+      console.log(this.directionInfo);
+      switch(this.directionInfo.direction) {
+        // 前
+        case 1:
+          if (this.directionInfo.row !== 0) {
+            this.directionInfo.row--;
+            this.directionInfo.offsetY -=100;
+            this.dom.style.top = `${this.directionInfo.offsetY}px`;
+            console.log(this.directionInfo);
+            break;
+          }
+          break;
+        // 右
+        case 2:
+          if (this.directionInfo.column !== 4) {
+            this.directionInfo.column++;
+            this.directionInfo.offsetX +=100;
+            this.dom.style.left = `${this.directionInfo.offsetX}px`;
+            console.log(this.directionInfo);
+            break;
+          }
+          break;
+        // 后
+        case 3:
+          if (this.directionInfo.row !== 3) {
+            this.directionInfo.row++;
+            this.directionInfo.offsetY +=100;
+            this.dom.style.top = `${this.directionInfo.offsetY}px`;
+            console.log(this.directionInfo);
+            break;
+          }
+          break;
+        // 左
+        case 4:
+          if (this.directionInfo.column !== 1) {
+            this.directionInfo.column--;
+            this.directionInfo.offsetX -=100;
+            this.dom.style.left = `${this.directionInfo.offsetX}px`;
+            console.log(this.directionInfo);
+            break;
+          }
+          break;
+      }
+    };
+    goLeft(){
+      // 1 前 2右 3 后 4 左
+      this.deg -=90;
+      switch (this.directionInfo.direction) {
+        case 1:this.directionInfo.direction = 4;break;
+        case 2:this.directionInfo.direction = 1;break;
+        case 3:this.directionInfo.direction = 2;break;
+        case 4:this.directionInfo.direction = 3;break;
+      }
+      this.setDeg(this.deg);
+    };
+    goRight(){
+      // 1 前 2右 3 后 4 左
+      this.deg +=90;
+      if (this.directionInfo.direction === 4) {
+        this.directionInfo.direction = 1;
+      } else {
+        this.directionInfo.direction ++;
+      }
+      this.setDeg(this.deg);
+    };
+    goBack(){
+      // 1 前 2右 3 后 4 左
+      switch (this.directionInfo.direction) {
+        case 1:this.directionInfo.direction = 3;break;
+        case 2:this.directionInfo.direction = 4;break;
+        case 3:this.directionInfo.direction = 1;break;
+        case 4:this.directionInfo.direction = 2;break;
+      }
+      this.deg +=180;
+      this.setDeg(this.deg);
+    }
+  }
+  let block = new Block();
+  document.getElementsByClassName('operationArea')[0].addEventListener('click',(e) => {
+    const type = e.target.dataset.type;
+    switch(type) {
+      case 'forward':block.goForward();break;
+      case 'left':block.goLeft();break;
+      case 'right':block.goRight();break;
+      case 'back':block.goBack();break;
+    }
+  })
+</script>
+</html>
